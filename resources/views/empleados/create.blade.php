@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-bold text-2xl text-slate-800 leading-tight">
-                Registrar Nuevo Empleado
+                Registrar Nuevo Trabajador
             </h2>
             <a href="{{ route('empleados.index') }}" class="text-sm font-semibold text-slate-600 hover:text-slate-900">
                 &larr; Volver al Listado

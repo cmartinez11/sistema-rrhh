@@ -46,9 +46,9 @@
                         <form action="{{ route('boletas.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                             @csrf
                             <div>
-                                <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Empleado *</label>
+                                <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Trabajador *</label>
                                 <select name="empleado_id" required class="w-full text-sm rounded-xl border-slate-300">
-                                    <option value="">Seleccionar Empleado...</option>
+                                    <option value="">Seleccionar Trabajador...</option>
                                     @foreach ($empleados as $emp)
                                         <option value="{{ $emp->id }}">{{ $emp->nombre_completo }} (DNI: {{ $emp->dni }})</option>
                                     @endforeach
@@ -190,7 +190,7 @@
                     <table class="w-full text-left text-sm text-slate-600">
                         <thead class="bg-slate-50 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-100">
                             <tr>
-                                <th class="px-6 py-3.5">Empleado / DNI</th>
+                                <th class="px-6 py-3.5">Trabajador / DNI</th>
                                 <th class="px-6 py-3.5">Área</th>
                                 <th class="px-6 py-3.5">Periodo / Quincena</th>
                                 <th class="px-6 py-3.5">Estado Envío</th>
