@@ -69,11 +69,28 @@
                             @error('cargo_id') <span class="text-xs text-rose-500 mt-1">{{ $message }}</span> @enderror
                         </div>
 
-                        <!-- Fecha Ingreso -->
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Fecha de Ingreso *</label>
-                            <input type="date" name="fecha_ingreso" value="{{ old('fecha_ingreso', date('Y-m-d')) }}" required class="w-full rounded-xl border-slate-300 focus:border-cyan-500 focus:ring-cyan-500">
-                            @error('fecha_ingreso') <span class="text-xs text-rose-500 mt-1">{{ $message }}</span> @enderror
+                        <!-- Sección Fechas (3 Columnas) -->
+                        <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-6 bg-slate-50/80 p-4 rounded-xl border border-slate-200/60">
+                            <!-- Fecha Ingreso -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Fecha de Ingreso *</label>
+                                <input type="date" name="fecha_ingreso" value="{{ old('fecha_ingreso', date('Y-m-d')) }}" required class="w-full rounded-xl border-slate-300 focus:border-cyan-500 focus:ring-cyan-500 bg-white">
+                                @error('fecha_ingreso') <span class="text-xs text-rose-500 mt-1">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Fecha Inicio Contrato -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Fecha Inicio Contrato</label>
+                                <input type="date" name="fecha_inicio_contrato" value="{{ old('fecha_inicio_contrato') }}" class="w-full rounded-xl border-slate-300 focus:border-cyan-500 focus:ring-cyan-500 bg-white">
+                                @error('fecha_inicio_contrato') <span class="text-xs text-rose-500 mt-1">{{ $message }}</span> @enderror
+                            </div>
+
+                            <!-- Fecha Fin Contrato -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Fecha Fin Contrato</label>
+                                <input type="date" name="fecha_fin_contrato" value="{{ old('fecha_fin_contrato') }}" class="w-full rounded-xl border-slate-300 focus:border-cyan-500 focus:ring-cyan-500 bg-white">
+                                @error('fecha_fin_contrato') <span class="text-xs text-rose-500 mt-1">{{ $message }}</span> @enderror
+                            </div>
                         </div>
 
                         <!-- Estado -->
@@ -87,7 +104,7 @@
                         </div>
 
                         <!-- Teléfono -->
-                        <div class="md:col-span-2">
+                        <div>
                             <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Teléfono / Celular</label>
                             <input type="text" name="telefono" value="{{ old('telefono') }}" placeholder="Ej. 987654321" class="w-full rounded-xl border-slate-300 focus:border-cyan-500 focus:ring-cyan-500">
                         </div>

@@ -20,6 +20,8 @@ class StoreEmpleadoRequest extends FormRequest
             'cargo_id' => ['required', 'exists:cargos,id'],
             'area_id' => ['required', 'exists:areas,id'],
             'fecha_ingreso' => ['required', 'date'],
+            'fecha_inicio_contrato' => ['nullable', 'date'],
+            'fecha_fin_contrato' => ['nullable', 'date', 'after_or_equal:fecha_inicio_contrato'],
             'estado' => ['required', 'in:activo,inactivo'],
             'email' => ['required', 'email', 'max:255', 'unique:empleados,email'],
             'telefono' => ['nullable', 'string', 'max:30'],

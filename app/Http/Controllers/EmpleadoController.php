@@ -37,12 +37,49 @@ class EmpleadoController extends Controller
             $query->where('estado', $request->input('estado'));
         }
 
+        if ($request->filled('estado_contrato')) {
+            $today = now()->startOfDay();
+            $estadoContrato = $request->input('estado_contrato');
+
+            if ($estadoContrato === 'vigente') {
+                $query->whereNotNull('fecha_fin_contrato')
+                      ->whereDate('fecha_fin_contrato', '>', $today->copy()->addDays(30));
+            } elseif ($estadoContrato === 'por_vencer') {
+                $query->whereNotNull('fecha_fin_contrato')
+                      ->whereDate('fecha_fin_contrato', '>=', $today)
+                      ->whereDate('fecha_fin_contrato', '<=', $today->copy()->addDays(30));
+            } elseif ($estadoContrato === 'vencido') {
+                $query->whereNotNull('fecha_fin_contrato')
+                      ->whereDate('fecha_fin_contrato', '<', $today);
+            } elseif ($estadoContrato === 'sin_contrato') {
+                $query->whereNull('fecha_fin_contrato');
+            }
+        }
+
         $empleados = $query->orderBy('apellidos')->paginate(10)->withQueryString();
 
         $areas = Area::orderBy('nombre')->get();
         $cargos = Cargo::orderBy('nombre')->get();
 
-        return view('empleados.index', compact('empleados', 'areas', 'cargos'));
+        $today = now()->startOfDay();
+        $metrics = [
+            'total_activos' => Empleado::where('estado', 'activo')->count(),
+            'vigentes' => Empleado::where('estado', 'activo')
+                ->whereNotNull('fecha_fin_contrato')
+                ->whereDate('fecha_fin_contrato', '>', $today->copy()->addDays(30))
+                ->count(),
+            'por_vencer' => Empleado::where('estado', 'activo')
+                ->whereNotNull('fecha_fin_contrato')
+                ->whereDate('fecha_fin_contrato', '>=', $today)
+                ->whereDate('fecha_fin_contrato', '<=', $today->copy()->addDays(30))
+                ->count(),
+            'vencidos' => Empleado::where('estado', 'activo')
+                ->whereNotNull('fecha_fin_contrato')
+                ->whereDate('fecha_fin_contrato', '<', $today)
+                ->count(),
+        ];
+
+        return view('empleados.index', compact('empleados', 'areas', 'cargos', 'metrics'));
     }
 
     public function create()

@@ -21,10 +21,15 @@ class EnvioBoleta extends Model
         'cuerpo_html',
         'mensaje_error',
         'enviado_por',
+        'confirmado_at',
+        'token_confirmacion',
+        'ip_confirmacion',
+        'user_agent_confirmacion',
     ];
 
     protected $casts = [
         'fecha_envio' => 'datetime',
+        'confirmado_at' => 'datetime',
         'headers_raw' => 'array',
     ];
 

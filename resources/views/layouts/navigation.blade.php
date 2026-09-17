@@ -6,10 +6,7 @@
                 <!-- Logo Plásticos Fénix -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 group">
-                        <div class="flex flex-col">
-                            <span class="font-extrabold text-base tracking-wider text-white">PLÁSTICOS FÉNIX</span>
-                            <span class="text-[10px] text-cyan-400 font-semibold tracking-widest uppercase">Sistema de RRHH</span>
-                        </div>
+                        <img src="{{ asset('logo2.png') }}" alt="PLASTICOS FENIX" class="h-16 w-auto object-contain" style="margin-bottom: 20px">
                     </a>
                 </div>
 

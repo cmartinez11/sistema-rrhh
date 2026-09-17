@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 
+
 class Contrato extends Model
 {
     use HasFactory;

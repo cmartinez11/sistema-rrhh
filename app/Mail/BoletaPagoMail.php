@@ -24,11 +24,11 @@ class BoletaPagoMail extends Mailable
 
         // Reemplazar variables dinámicas en el asunto y cuerpo si son provistos
         $variables = [
-            '{nombre}' => $this->boleta->empleado->nombre_completo,
-            '{dni}' => $this->boleta->empleado->dni,
-            '{periodo}' => $this->boleta->periodo_formateado,
-            '{periodo_mes}' => $this->boleta->nombre_mes,
-            '{periodo_anio}' => $this->boleta->periodo_anio,
+            '{nombre}' => $this->boleta->empleado->nombre_completo ?? '',
+            '{dni}' => $this->boleta->empleado->dni ?? '',
+            '{periodo}' => $this->boleta->periodo_formateado ?? '',
+            '{periodo_mes}' => $this->boleta->nombre_mes ?? '',
+            '{periodo_anio}' => $this->boleta->periodo_anio ?? '',
             '{cargo}' => $this->boleta->empleado->cargo->nombre ?? 'N/A',
             '{area}' => $this->boleta->empleado->area->nombre ?? 'N/A',
         ];

@@ -16,11 +16,58 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <x-flash-messages />
 
+            <!-- Gerencia KPI Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Total Activos -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Activos</p>
+                        <p class="text-2xl font-extrabold text-slate-800 mt-1">{{ $metrics['total_activos'] }}</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                    </div>
+                </div>
+
+                <!-- Contratos Vigentes -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold text-emerald-600 uppercase tracking-wider">Vigentes (> 30 días)</p>
+                        <p class="text-2xl font-extrabold text-emerald-700 mt-1">{{ $metrics['vigentes'] }}</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                </div>
+
+                <!-- Contratos Por Vencer -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold text-amber-600 uppercase tracking-wider">Por Vencer (≤ 30 días)</p>
+                        <p class="text-2xl font-extrabold text-amber-700 mt-1">{{ $metrics['por_vencer'] }}</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                </div>
+
+                <!-- Contratos Vencidos -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-semibold text-rose-600 uppercase tracking-wider">Contratos Vencidos</p>
+                        <p class="text-2xl font-extrabold text-rose-700 mt-1">{{ $metrics['vencidos'] }}</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-xl bg-rose-50 flex items-center justify-center text-rose-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                    </div>
+                </div>
+            </div>
+
             <!-- Filters Bar -->
             <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
-                <form method="GET" action="{{ route('empleados.index') }}" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
+                <form method="GET" action="{{ route('empleados.index') }}" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
                     <!-- Search Input -->
-                    <div class="md:col-span-2">
+                    <div class="lg:col-span-2">
                         <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Buscar</label>
                         <input type="text" name="search" value="{{ request('search') }}" placeholder="Nombre, Apellido, DNI o Correo..." class="w-full text-sm rounded-xl border-slate-300 focus:border-cyan-500 focus:ring-cyan-500">
                     </div>
@@ -44,6 +91,18 @@
                             @foreach ($cargos as $cargo)
                                 <option value="{{ $cargo->id }}" {{ request('cargo_id') == $cargo->id ? 'selected' : '' }}>{{ $cargo->nombre }}</option>
                             @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Filter Semáforo Contrato -->
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Semáforo Contrato</label>
+                        <select name="estado_contrato" class="w-full text-sm rounded-xl border-slate-300 focus:border-cyan-500 focus:ring-cyan-500">
+                            <option value="">Todos</option>
+                            <option value="vigente" {{ request('estado_contrato') == 'vigente' ? 'selected' : '' }}>Vigentes (> 30 días)</option>
+                            <option value="por_vencer" {{ request('estado_contrato') == 'por_vencer' ? 'selected' : '' }}>Por Vencer (≤ 30 días)</option>
+                            <option value="vencido" {{ request('estado_contrato') == 'vencido' ? 'selected' : '' }}>Vencidos</option>
+                            <option value="sin_contrato" {{ request('estado_contrato') == 'sin_contrato' ? 'selected' : '' }}>Sin fecha fin</option>
                         </select>
                     </div>
 
@@ -73,8 +132,9 @@
                                 <th class="px-6 py-3.5">DNI</th>
                                 <th class="px-6 py-3.5">Empleado</th>
                                 <th class="px-6 py-3.5">Área / Cargo</th>
+                                <th class="px-6 py-3.5">Vigencia Contrato</th>
+                                <th class="px-6 py-3.5">Estado Contrato</th>
                                 <th class="px-6 py-3.5">Correo Registrado</th>
-                                <th class="px-6 py-3.5">Fecha Ingreso</th>
                                 <th class="px-6 py-3.5">Estado</th>
                                 <th class="px-6 py-3.5 text-right">Acciones</th>
                             </tr>
@@ -87,7 +147,7 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="font-bold text-slate-900">{{ $emp->nombre_completo }}</div>
-                                    <div class="text-xs text-slate-400">Tel: {{ $emp->telefono ?? 'Sin teléfono' }}</div>
+                                    <div class="text-xs text-slate-400">Ingreso: {{ $emp->fecha_ingreso ? $emp->fecha_ingreso->format('d/m/Y') : '-' }}</div>
                                 </td>
                                 <td class="px-6 py-4">
                                     <span class="inline-block px-2.5 py-0.5 rounded-md text-xs font-semibold bg-slate-100 text-slate-700">
@@ -95,11 +155,26 @@
                                     </span>
                                     <div class="text-xs text-slate-500 mt-0.5">{{ $emp->cargo->nombre ?? 'N/A' }}</div>
                                 </td>
-                                <td class="px-6 py-4 text-slate-700">
-                                    {{ $emp->email }}
+                                <td class="px-6 py-4 text-xs font-mono text-slate-600 whitespace-nowrap">
+                                    @if ($emp->fecha_inicio_contrato || $emp->fecha_fin_contrato)
+                                        <div>
+                                            {{ $emp->fecha_inicio_contrato ? $emp->fecha_inicio_contrato->format('d/m/Y') : 'S/F' }}
+                                            <span class="text-slate-400 mx-1">-</span>
+                                            {{ $emp->fecha_fin_contrato ? $emp->fecha_fin_contrato->format('d/m/Y') : 'S/F' }}
+                                        </div>
+                                    @else
+                                        <span class="text-slate-400 italic">No registrada</span>
+                                    @endif
                                 </td>
-                                <td class="px-6 py-4 text-xs text-slate-500">
-                                    {{ $emp->fecha_ingreso ? $emp->fecha_ingreso->format('d/m/Y') : '-' }}
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @php $alerta = $emp->alerta_contrato; @endphp
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold shadow-sm border {{ $alerta['badge'] }}">
+                                        {{ $alerta['label'] }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 text-slate-700">
+                                    <div>{{ $emp->email }}</div>
+                                    <div class="text-xs text-slate-400">Tel: {{ $emp->telefono ?? 'Sin teléfono' }}</div>
                                 </td>
                                 <td class="px-6 py-4">
                                     @if ($emp->estado === 'activo')
@@ -127,7 +202,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="7" class="px-6 py-8 text-center text-slate-400 italic">
+                                <td colspan="8" class="px-6 py-8 text-center text-slate-400 italic">
                                     No se encontraron empleados registrados.
                                 </td>
                             </tr>

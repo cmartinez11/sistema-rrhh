@@ -21,11 +21,16 @@ class EnvioContrato extends Model
         'cuerpo_html',
         'mensaje_error',
         'enviado_por',
+        'confirmado_at',
+        'token_confirmacion',
+        'ip_confirmacion',
+        'user_agent_confirmacion',
     ];
 
     protected $casts = [
         'headers_raw' => 'array',
         'fecha_envio' => 'datetime',
+        'confirmado_at' => 'datetime',
     ];
 
     public function contrato(): BelongsTo

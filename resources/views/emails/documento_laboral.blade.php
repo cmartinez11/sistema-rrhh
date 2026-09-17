@@ -92,7 +92,7 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>PLÁSTICOS FÉNIX</h1>
+            <img src="{{ $message->embed(public_path('logo2.png')) }}" alt="PLASTICOS FENIX" style="max-height: 45px; width: auto; display: block; margin: 0 auto; border: 0;" />
             <p>Departamento de Recursos Humanos - Notificación Oficial</p>
         </div>
 

@@ -13,10 +13,8 @@
                     <!-- Header -->
                     <tr>
                         <td style="background-color: #15803d; padding: 32px 40px; text-align: center;">
-                            <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;">
-                                PLÁSTICOS FÉNIX
-                            </h1>
-                            <p style="color: #dcfce7; margin: 6px 0 0 0; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
+                            <img src="{{ $message->embed(public_path('logo2.png')) }}" alt="PLASTICOS FENIX" style="max-height: 45px; width: auto; display: block; margin: 0 auto; border: 0;" />
+                            <p style="color: #dcfce7; margin: 10px 0 0 0; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">
                                 Departamento de Recursos Humanos — Notificación Oficial
                             </p>
                         </td>

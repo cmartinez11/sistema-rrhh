@@ -3,24 +3,13 @@
         <!-- Columna Izquierda (Login Form) -->
         <div class="p-8 sm:p-12 flex flex-col justify-between">
             <!-- Header / Logotipo Corporativo -->
-            <div>
-                <div class="flex items-center gap-3">
-                    
-                    <div>
-                        <h2 class="font-extrabold text-slate-900 text-lg tracking-tight leading-none">PLÁSTICOS FÉNIX</h2>
-                        <span class="text-[10px] font-semibold tracking-wider text-emerald-700 uppercase">RECURSOS HUMANOS</span>
-                    </div>
-                </div>
+            <div class="flex flex-col items-center justify-center text-center">
+                <img src="{{ asset('logo2.png') }}" alt="PLASTICOS FENIX" class="h-32 w-auto object-contain mb-4">
             </div>
 
             <!-- Form Body -->
             <div class="my-6">
-                <!-- Avatar Circular de Usuario en Escala de Grises -->
-                <div class="w-20 h-20 rounded-full bg-slate-100 border-2 border-slate-200 flex items-center justify-center text-slate-400 mx-auto mb-6 shadow-inner">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                </div>
+                
 
                 <!-- Session Status -->
                 <x-auth-session-status class="mb-4 text-center" :status="session('status')" />
@@ -108,7 +97,7 @@
                     Bienvenido.
                 </h1>
                 <p class="text-slate-300 text-base leading-relaxed max-w-sm">
-                    Plataforma corporativa de gestión de recursos humanos y distribución digital de boletas de pago y contratos de PLASTICOS FENIX.
+                    Plataforma corporativa de gestión de recursos humanos y distribución digital de boletas de pago y contratos de FENIX.
                 </p>
             </div>
 
@@ -118,7 +107,7 @@
                     <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                     </svg>
-                    Conexión Segura SSL
+                    Conexión Segura
                 </span>
                 <span>v1.0.0</span>
             </div>

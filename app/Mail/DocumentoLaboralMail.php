@@ -20,7 +20,7 @@ class DocumentoLaboralMail extends Mailable
     public function __construct(DocumentoLaboral $documento)
     {
         $this->documento = $documento->loadMissing(['empleado.area', 'empleado.cargo']);
-        
+
         $tipoStr = $this->documento->tipo_nombre;
         $empleadoNom = $this->documento->empleado->nombre_completo;
         $this->asuntoFinal = "{$tipoStr} - {$empleadoNom} - PLASTICOS FENIX";
